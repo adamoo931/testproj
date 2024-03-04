@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import './App.css';
+const App = () => {
+  const [formData, setFormData] = useState({
+    inputValue: '',
+  });
 
-function App() {
-  const [selectedOption, setSelectedOption] = useState('Option 1');
-
-  const handleButtonClick = () => {
-    alert('wygrales skrzynke wina');
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      inputValue: e.target.value,
+    });
   };
 
-  const handleComboBoxChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Przesłane dane:', formData);
   };
 
   return (
-    <div className="App">
-      <h1>wapienna street </h1>
-      <button onClick={handleButtonClick}>KPierdolnij w przycisk</button>
-      <select value={selectedOption} onChange={handleComboBoxChange}>
-        <option value="Option 1">Uretek</option>
-        <option value="Option 2">Geremek</option>
-        <option value="Option 3">Artuditu</option>
-      </select>
+    <div>
+      <h1>React Formularz</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Wprowadź dane:
+          <input
+            type="text"
+            value={formData.inputValue}
+            onChange={handleInputChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
-}
+};
 
 export default App;
